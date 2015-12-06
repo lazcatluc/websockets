@@ -16,14 +16,6 @@
 
 package samples.websocket.tomcat;
 
-import samples.websocket.tomcat.client.GreetingService;
-import samples.websocket.tomcat.client.SimpleGreetingService;
-import samples.websocket.tomcat.echo.DefaultEchoService;
-import samples.websocket.tomcat.echo.EchoService;
-import samples.websocket.tomcat.echo.EchoWebSocketHandler;
-import samples.websocket.tomcat.reverse.ReverseWebSocketEndpoint;
-import samples.websocket.tomcat.snake.SnakeWebSocketHandler;
-
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.builder.SpringApplicationBuilder;
@@ -34,19 +26,23 @@ import org.springframework.web.socket.WebSocketHandler;
 import org.springframework.web.socket.config.annotation.EnableWebSocket;
 import org.springframework.web.socket.config.annotation.WebSocketConfigurer;
 import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry;
-import org.springframework.web.socket.handler.PerConnectionWebSocketHandler;
 import org.springframework.web.socket.server.standard.ServerEndpointExporter;
+
+import samples.websocket.tomcat.client.GreetingService;
+import samples.websocket.tomcat.client.SimpleGreetingService;
+import samples.websocket.tomcat.echo.DefaultEchoService;
+import samples.websocket.tomcat.echo.EchoService;
+import samples.websocket.tomcat.echo.EchoWebSocketHandler;
+import samples.websocket.tomcat.reverse.ReverseWebSocketEndpoint;
 
 @Configuration
 @EnableAutoConfiguration
 @EnableWebSocket
-public class SampleTomcatWebSocketApplication extends SpringBootServletInitializer
-		implements WebSocketConfigurer {
+public class SampleTomcatWebSocketApplication extends SpringBootServletInitializer implements WebSocketConfigurer {
 
 	@Override
 	public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
 		registry.addHandler(echoWebSocketHandler(), "/echo").withSockJS();
-		registry.addHandler(snakeWebSocketHandler(), "/snake").withSockJS();
 	}
 
 	@Override
@@ -67,11 +63,6 @@ public class SampleTomcatWebSocketApplication extends SpringBootServletInitializ
 	@Bean
 	public WebSocketHandler echoWebSocketHandler() {
 		return new EchoWebSocketHandler(echoService());
-	}
-
-	@Bean
-	public WebSocketHandler snakeWebSocketHandler() {
-		return new PerConnectionWebSocketHandler(SnakeWebSocketHandler.class);
 	}
 
 	@Bean
