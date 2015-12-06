@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package samples.websocket.tomcat;
+package ro.contezi.websockets.main;
 
 import static org.junit.Assert.assertEquals;
 
@@ -31,16 +31,17 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import samples.websocket.ClientConfiguration;
+import ro.contezi.websockets.ClientConfiguration;
+import ro.contezi.websockets.SampleWebSocketApplication;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(SampleTomcatWebSocketApplication.class)
-@WebIntegrationTest(randomPort = true)
+@SpringApplicationConfiguration(SampleWebSocketApplication.class)
+@WebIntegrationTest
 @DirtiesContext
-public class SampleWebSocketsApplicationTests {
+public class SampleWebSocketsApplicationTest {
 
 	@Value("${local.server.port}")
-	private int port = 1234;
+	private int port;
 
 	@Test
 	public void reverseEndpoint() throws Exception {

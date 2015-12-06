@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package samples.websocket.tomcat;
+package ro.contezi.websockets;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -25,16 +25,16 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.socket.config.annotation.EnableWebSocket;
 import org.springframework.web.socket.server.standard.ServerEndpointExporter;
 
-import samples.websocket.tomcat.reverse.ReverseWebSocketEndpoint;
+import ro.contezi.websockets.reverse.ReverseWebSocketEndpoint;
 
 @Configuration
 @EnableAutoConfiguration
 @EnableWebSocket
-public class SampleTomcatWebSocketApplication extends SpringBootServletInitializer {
+public class SampleWebSocketApplication extends SpringBootServletInitializer {
 
 	@Override
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-		return application.sources(SampleTomcatWebSocketApplication.class);
+		return application.sources(SampleWebSocketApplication.class);
 	}
 
 	@Bean
@@ -48,7 +48,7 @@ public class SampleTomcatWebSocketApplication extends SpringBootServletInitializ
 	}
 
 	public static void main(String[] args) {
-		SpringApplication.run(SampleTomcatWebSocketApplication.class, args);
+		SpringApplication.run(SampleWebSocketApplication.class, args);
 	}
 
 }

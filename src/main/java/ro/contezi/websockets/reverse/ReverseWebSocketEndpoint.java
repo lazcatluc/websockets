@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package samples.websocket.tomcat.reverse;
+package ro.contezi.websockets.reverse;
 
 import java.io.IOException;
 
