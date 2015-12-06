@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package samples.websocket.tomcat.client;
+package samples.websocket;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicReference;

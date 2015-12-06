@@ -13,8 +13,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.socket.client.WebSocketConnectionManager;
 import org.springframework.web.socket.client.standard.StandardWebSocketClient;
 
-import samples.websocket.tomcat.client.SimpleClientWebSocketHandler;
-
 @Configuration
 public class ClientConfiguration implements CommandLineRunner {
 
