@@ -22,28 +22,17 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.context.web.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.socket.WebSocketHandler;
 import org.springframework.web.socket.config.annotation.EnableWebSocket;
-import org.springframework.web.socket.config.annotation.WebSocketConfigurer;
-import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry;
 import org.springframework.web.socket.server.standard.ServerEndpointExporter;
 
 import samples.websocket.tomcat.client.GreetingService;
 import samples.websocket.tomcat.client.SimpleGreetingService;
-import samples.websocket.tomcat.echo.DefaultEchoService;
-import samples.websocket.tomcat.echo.EchoService;
-import samples.websocket.tomcat.echo.EchoWebSocketHandler;
 import samples.websocket.tomcat.reverse.ReverseWebSocketEndpoint;
 
 @Configuration
 @EnableAutoConfiguration
 @EnableWebSocket
-public class SampleTomcatWebSocketApplication extends SpringBootServletInitializer implements WebSocketConfigurer {
-
-	@Override
-	public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
-		registry.addHandler(echoWebSocketHandler(), "/echo").withSockJS();
-	}
+public class SampleTomcatWebSocketApplication extends SpringBootServletInitializer {
 
 	@Override
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
@@ -51,18 +40,8 @@ public class SampleTomcatWebSocketApplication extends SpringBootServletInitializ
 	}
 
 	@Bean
-	public EchoService echoService() {
-		return new DefaultEchoService("Did you say \"%s\"?");
-	}
-
-	@Bean
 	public GreetingService greetingService() {
 		return new SimpleGreetingService();
-	}
-
-	@Bean
-	public WebSocketHandler echoWebSocketHandler() {
-		return new EchoWebSocketHandler(echoService());
 	}
 
 	@Bean

@@ -48,20 +48,6 @@ public class CustomContainerWebSocketsApplicationTests {
 	private static int PORT = SocketUtils.findAvailableTcpPort();
 
 	@Test
-	public void echoEndpoint() throws Exception {
-		ConfigurableApplicationContext context = new SpringApplicationBuilder(ClientConfiguration.class,
-				PropertyPlaceholderAutoConfiguration.class)
-						.properties("websocket.uri:ws://localhost:" + PORT + "/ws/echo/websocket")
-						.run("--spring.main.web_environment=false");
-		long count = context.getBean(ClientConfiguration.class).getLatch().getCount();
-		AtomicReference<String> messagePayloadReference = context.getBean(ClientConfiguration.class)
-				.getMessagePayload();
-		context.close();
-		assertEquals(0, count);
-		assertEquals("Did you say \"Hello world!\"?", messagePayloadReference.get());
-	}
-
-	@Test
 	public void reverseEndpoint() throws Exception {
 		ConfigurableApplicationContext context = new SpringApplicationBuilder(ClientConfiguration.class,
 				PropertyPlaceholderAutoConfiguration.class)
