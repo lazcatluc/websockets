@@ -25,8 +25,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.socket.config.annotation.EnableWebSocket;
 import org.springframework.web.socket.server.standard.ServerEndpointExporter;
 
-import samples.websocket.tomcat.client.GreetingService;
-import samples.websocket.tomcat.client.SimpleGreetingService;
 import samples.websocket.tomcat.reverse.ReverseWebSocketEndpoint;
 
 @Configuration
@@ -37,11 +35,6 @@ public class SampleTomcatWebSocketApplication extends SpringBootServletInitializ
 	@Override
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
 		return application.sources(SampleTomcatWebSocketApplication.class);
-	}
-
-	@Bean
-	public GreetingService greetingService() {
-		return new SimpleGreetingService();
 	}
 
 	@Bean

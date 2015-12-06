@@ -58,7 +58,7 @@ public class CustomContainerWebSocketsApplicationTests {
 				.getMessagePayload();
 		context.close();
 		assertEquals(0, count);
-		assertEquals("Reversed: !dlrow olleH", messagePayloadReference.get());
+		assertEquals("Reversed: !olleH", messagePayloadReference.get());
 	}
 
 	@Configuration

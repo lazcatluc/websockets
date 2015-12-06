@@ -18,6 +18,7 @@ package samples.websocket.tomcat.client;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicReference;
+import java.util.function.Supplier;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -31,14 +32,14 @@ public class SimpleClientWebSocketHandler extends TextWebSocketHandler {
 
 	protected Log logger = LogFactory.getLog(SimpleClientWebSocketHandler.class);
 
-	private final GreetingService greetingService;
+	private final Supplier<String> greetingService;
 
 	private final CountDownLatch latch;
 
 	private final AtomicReference<String> messagePayload;
 
 	@Autowired
-	public SimpleClientWebSocketHandler(GreetingService greetingService,
+	public SimpleClientWebSocketHandler(Supplier<String> greetingService,
 			CountDownLatch latch, AtomicReference<String> message) {
 		this.greetingService = greetingService;
 		this.latch = latch;
@@ -47,7 +48,7 @@ public class SimpleClientWebSocketHandler extends TextWebSocketHandler {
 
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
-		TextMessage message = new TextMessage(this.greetingService.getGreeting());
+		TextMessage message = new TextMessage(this.greetingService.get());
 		session.sendMessage(message);
 	}
 

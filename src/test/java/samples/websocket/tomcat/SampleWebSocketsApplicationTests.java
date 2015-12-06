@@ -54,7 +54,7 @@ public class SampleWebSocketsApplicationTests {
 				.getBean(ClientConfiguration.class).getMessagePayload();
 		context.close();
 		assertEquals(0, count);
-		assertEquals("Reversed: !dlrow olleH", messagePayloadReference.get());
+		assertEquals("Reversed: !olleH", messagePayloadReference.get());
 	}
 
 }

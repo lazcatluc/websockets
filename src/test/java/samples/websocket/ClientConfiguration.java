@@ -13,13 +13,11 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.socket.client.WebSocketConnectionManager;
 import org.springframework.web.socket.client.standard.StandardWebSocketClient;
 
-import samples.websocket.tomcat.client.GreetingService;
 import samples.websocket.tomcat.client.SimpleClientWebSocketHandler;
-import samples.websocket.tomcat.client.SimpleGreetingService;
 
-@Configuration 
+@Configuration
 public class ClientConfiguration implements CommandLineRunner {
-	
+
 	private static final Log LOGGER = LogFactory.getLog(ClientConfiguration.class);
 
 	@Value("${websocket.uri}")
@@ -34,8 +32,7 @@ public class ClientConfiguration implements CommandLineRunner {
 		LOGGER.info("Waiting for response: latch=" + this.getLatch().getCount());
 		if (this.getLatch().await(10, TimeUnit.SECONDS)) {
 			LOGGER.info("Got response: " + this.getMessagePayload().get());
-		}
-		else {
+		} else {
 			LOGGER.info("Response not received: latch=" + this.getLatch().getCount());
 		}
 	}
@@ -43,8 +40,7 @@ public class ClientConfiguration implements CommandLineRunner {
 	@Bean
 	public WebSocketConnectionManager wsConnectionManager() {
 
-		WebSocketConnectionManager manager = new WebSocketConnectionManager(client(),
-				handler(), this.webSocketUri);
+		WebSocketConnectionManager manager = new WebSocketConnectionManager(client(), handler(), this.webSocketUri);
 		manager.setAutoStartup(true);
 
 		return manager;
@@ -57,13 +53,7 @@ public class ClientConfiguration implements CommandLineRunner {
 
 	@Bean
 	public SimpleClientWebSocketHandler handler() {
-		return new SimpleClientWebSocketHandler(greetingService(), this.getLatch(),
-				this.getMessagePayload());
-	}
-
-	@Bean
-	public GreetingService greetingService() {
-		return new SimpleGreetingService();
+		return new SimpleClientWebSocketHandler(() -> "Hello!", this.getLatch(), this.getMessagePayload());
 	}
 
 	public CountDownLatch getLatch() {
