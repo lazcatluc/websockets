@@ -28,7 +28,6 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.boot.test.WebIntegrationTest;
 import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import ro.contezi.websockets.ClientConfiguration;
@@ -37,7 +36,6 @@ import ro.contezi.websockets.SampleWebSocketApplication;
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(SampleWebSocketApplication.class)
 @WebIntegrationTest
-@DirtiesContext
 public class SampleWebSocketsApplicationTest {
 
 	@Value("${local.server.port}")
